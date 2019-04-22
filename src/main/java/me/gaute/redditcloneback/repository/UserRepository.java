@@ -1,5 +1,6 @@
 package me.gaute.redditcloneback.repository;
 
+import me.gaute.redditcloneback.model.Subreddit;
 import me.gaute.redditcloneback.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 

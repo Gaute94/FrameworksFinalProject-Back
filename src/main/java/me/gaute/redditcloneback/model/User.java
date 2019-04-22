@@ -1,12 +1,12 @@
 package me.gaute.redditcloneback.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -22,6 +22,13 @@ public class User {
     private String email;
     private String password;
     private String role;
+    @OneToMany (fetch = FetchType.LAZY)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @JsonManagedReference
+    private List<Subreddit> subreddits;
+    @OneToMany (fetch = FetchType.LAZY)
+    private List<User> following;
 
     public User(String username, String email, String password) {
         this.username = username;
