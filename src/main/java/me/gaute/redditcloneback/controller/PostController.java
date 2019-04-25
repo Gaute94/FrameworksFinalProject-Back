@@ -17,6 +17,9 @@ public class PostController {
     @Autowired
     PostService postService;
 
+    @Autowired
+    SubredditService subredditService;
+
     @GetMapping("/posts")
     public List<Post> getAllPosts(){
         return postService.getAllPosts();
@@ -32,6 +35,14 @@ public class PostController {
         return userService.getOne(id);
     }
     */
+    @GetMapping("/posts/{subreddit}")
+    public List<Post> getPostBySubreddit(@PathVariable String subreddit){
+        Optional<Subreddit> subreddit2 = subredditService.getById(subreddit);
+        if(!subreddit2.isPresent()){
+            return null;
+        }
+        return postService.getAllSubredditPosts(subreddit2.get());
+    }
 
     @DeleteMapping("/posts/{id}")
     public void deletePostById(@PathVariable long id){
