@@ -13,6 +13,7 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String title;
+    @Column(length = 2000)
     private String comment;
     @ManyToOne(fetch = FetchType.EAGER)
     private Subreddit subreddit;

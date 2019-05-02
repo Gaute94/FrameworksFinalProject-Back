@@ -22,7 +22,7 @@ public class User {
     private String email;
     private String password;
     private String role;
-    @OneToMany (fetch = FetchType.LAZY)
+    @ManyToMany (fetch = FetchType.LAZY)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @JsonManagedReference

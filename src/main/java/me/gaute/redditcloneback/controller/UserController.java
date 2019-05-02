@@ -1,5 +1,6 @@
 package me.gaute.redditcloneback.controller;
 
+import me.gaute.redditcloneback.model.SaveUserResponse;
 import me.gaute.redditcloneback.model.User;
 import me.gaute.redditcloneback.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,13 +44,13 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public User saveUser( @RequestBody  User newUser){
-        return userService.save(newUser);
+    public SaveUserResponse saveUser(@RequestBody  User newUser){
+        return userService.save(newUser, false);
     }
 
     @PutMapping("/users/{id}")
-    public User updateUser(@PathVariable long id,  @RequestBody  User newUser){
+    public SaveUserResponse updateUser(@PathVariable long id,  @RequestBody  User newUser){
         newUser.setId(id);
-        return userService.save(newUser);
+        return userService.save(newUser, true);
     }
 }
