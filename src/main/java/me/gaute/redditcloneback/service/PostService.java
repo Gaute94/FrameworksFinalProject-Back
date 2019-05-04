@@ -3,6 +3,7 @@ package me.gaute.redditcloneback.service;
 
 import me.gaute.redditcloneback.model.Post;
 import me.gaute.redditcloneback.model.Subreddit;
+import me.gaute.redditcloneback.model.User;
 import me.gaute.redditcloneback.repository.PostRepository;
 import me.gaute.redditcloneback.repository.SubredditRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,5 +45,9 @@ public class PostService {
 
     public List<Post> getAllSubredditPosts(Subreddit subreddit){
         return postRepository.findBySubreddit(subreddit);
+    }
+
+    public List<Post> getPostsByOwner(User owner){
+        return postRepository.findByOwner(owner);
     }
 }
