@@ -41,13 +41,17 @@ public class DeleteService {
         }
     }
 
+    private void deleteAllPostsBySubreddit(Subreddit subreddit){
+        List<Post> posts = postService.getAllSubredditPosts(subreddit);
+        for(Post post : posts){
+            postService.deleteById(post.getId());
+        }
+    }
+
     public String deleteSubreddit(String subreddit){
         Optional<Subreddit> subreddit1 = subredditService.getById(subreddit);
         if(subreddit1.isPresent()) {
-            List<Post> posts = postService.getAllSubredditPosts(subreddit1.get());
-            for(Post post : posts){
-                postService.deleteById(post.getId());
-            }
+            deleteAllPostsBySubreddit(subreddit1.get());
             subredditService.deleteById(subreddit);
             return "Deleted";
         }else{

@@ -3,8 +3,10 @@ package me.gaute.redditcloneback.controller;
 
 import me.gaute.redditcloneback.model.Post;
 import me.gaute.redditcloneback.model.Subreddit;
+import me.gaute.redditcloneback.model.User;
 import me.gaute.redditcloneback.service.PostService;
 import me.gaute.redditcloneback.service.SubredditService;
+import me.gaute.redditcloneback.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +21,9 @@ public class PostController {
 
     @Autowired
     SubredditService subredditService;
+
+    @Autowired
+    UserService userService;
 
     @GetMapping("/posts")
     public List<Post> getAllPosts(){

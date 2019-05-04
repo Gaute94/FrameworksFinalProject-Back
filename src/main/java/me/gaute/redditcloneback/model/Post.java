@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -20,4 +21,6 @@ public class Post {
     @ManyToOne(fetch = FetchType.EAGER)
     private User owner;
     private int likes;
+    @ManyToMany(fetch = FetchType.LAZY)
+    private List<User> userLikes;
 }

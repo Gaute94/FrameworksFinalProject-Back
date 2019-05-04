@@ -50,4 +50,5 @@ public class PostService {
     public List<Post> getPostsByOwner(User owner){
         return postRepository.findByOwner(owner);
     }
+
 }
