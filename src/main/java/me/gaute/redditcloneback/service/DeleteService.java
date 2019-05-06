@@ -78,7 +78,7 @@ public class DeleteService {
             user.get().setRole("ROLE_DELETED");
             user.get().getSubreddits().clear();
             user.get().setUsername(randomUsername());
-            user.get().setPassword(randomPassword());
+            user.get().setPassword("{noop}" + randomPassword());
             deleteAllPostsByOwner(user.get());
             //deleteImagesByOwner(user.get());
             userService.save(user.get(), true);
