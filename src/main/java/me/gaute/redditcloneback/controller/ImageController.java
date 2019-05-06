@@ -1,9 +1,6 @@
 package me.gaute.redditcloneback.controller;
 
 import me.gaute.redditcloneback.model.Image;
-import me.gaute.redditcloneback.model.Post;
-import me.gaute.redditcloneback.model.Subreddit;
-import me.gaute.redditcloneback.model.User;
 import me.gaute.redditcloneback.service.ImageService;
 import me.gaute.redditcloneback.service.PostService;
 import me.gaute.redditcloneback.service.SubredditService;
@@ -30,28 +27,28 @@ public class ImageController {
     ImageService imageService;
 
     @GetMapping("/images")
-    public List<Image> getAllImages(){
+    public List<Image> getAllImages() {
         return imageService.getAllImages();
     }
 
     @GetMapping("/images/id/{id}")
-    public Optional<Image> getImageById(@PathVariable long id){
+    public Optional<Image> getImageById(@PathVariable long id) {
         return imageService.getById(id);
     }
 
 
     @DeleteMapping("/images/{id}")
-    public void deleteImageById(@PathVariable long id){
+    public void deleteImageById(@PathVariable long id) {
         imageService.deleteById(id);
     }
 
     @PostMapping("/images")
-    public Image saveImage( @RequestBody  Image newImage){
+    public Image saveImage(@RequestBody Image newImage) {
         return imageService.save(newImage);
     }
 
     @PutMapping("/images/{id}")
-    public Image updateImage(@PathVariable long id,  @RequestBody  Image newImage){
+    public Image updateImage(@PathVariable long id, @RequestBody Image newImage) {
         newImage.setId(id);
         return imageService.save(newImage);
     }

@@ -4,7 +4,6 @@ import me.gaute.redditcloneback.model.Subreddit;
 import me.gaute.redditcloneback.model.User;
 import me.gaute.redditcloneback.repository.SubredditRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,33 +21,38 @@ public class SubredditService {
     @Autowired
     private SubredditRepository subredditRepository;
 
-    public List<Subreddit> getAllSubreddits(){ return subredditRepository.findAll(); }
+    public List<Subreddit> getAllSubreddits() {
+        return subredditRepository.findAll();
+    }
 
-    public List<Subreddit> getSubredditByOwner(String username){
+    public List<Subreddit> getSubredditByOwner(String username) {
         Optional<User> user = userService.getByUsername(username);
-        if(user.isPresent()){
+        if (user.isPresent()) {
             return subredditRepository.findSubredditByOwner(user.get());
-        }else{
+        } else {
             return null;
         }
     }
 
-    public Subreddit save(Subreddit subreddit){
+    public Subreddit save(Subreddit subreddit) {
         return subredditRepository.save(subreddit);
     }
 
-    public long countSubreddits(){
+    public long countSubreddits() {
         return subredditRepository.count();
     }
 
-    public void deleteById(String title){
+    public void deleteById(String title) {
         subredditRepository.deleteById(title);
     }
 
-    public Optional<Subreddit> getOne(String title){
+    public Optional<Subreddit> getOne(String title) {
         Optional<Subreddit> subreddit = subredditRepository.findById(title);
-        return subreddit;}
+        return subreddit;
+    }
 
-    public Optional<Subreddit> getById(String title){ return subredditRepository.findSubredditByTitle(title);}
+    public Optional<Subreddit> getById(String title) {
+        return subredditRepository.findSubredditByTitle(title);
+    }
 
 }

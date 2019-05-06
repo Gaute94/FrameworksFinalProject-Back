@@ -15,39 +15,33 @@ public class SubredditController {
     SubredditService subredditService;
 
     @GetMapping("/subreddits")
-    public List<Subreddit> getAllSubreddits(){
+    public List<Subreddit> getAllSubreddits() {
         return subredditService.getAllSubreddits();
     }
 
     @GetMapping("/subreddits/{title}")
-    public Optional<Subreddit> getSubredditByTitle(@PathVariable String title){
-        System.out.println("SERVER: entered getMovieById in MovieController");
+    public Optional<Subreddit> getSubredditByTitle(@PathVariable String title) {
         return subredditService.getOne(title);
     }
 
     @GetMapping("/subreddits/title/{title}")
-    public Optional<Subreddit> getSubredditById(@PathVariable String title){
+    public Optional<Subreddit> getSubredditById(@PathVariable String title) {
         return subredditService.getById(title);
     }
-    /*
-    @GetMapping("/subreddits/id/{id}")
-    public Optional<User> getUserById(@PathVariable long id){
-        return userService.getOne(id);
-    }
-    */
+
 
     @DeleteMapping("/subreddits/{title}")
-    public void deleteSubredditByTitle(@PathVariable String title){
+    public void deleteSubredditByTitle(@PathVariable String title) {
         subredditService.deleteById(title);
     }
 
     @PostMapping("/subreddits")
-    public Subreddit saveSubreddit( @RequestBody  Subreddit newSubreddit){
+    public Subreddit saveSubreddit(@RequestBody Subreddit newSubreddit) {
         return subredditService.save(newSubreddit);
     }
 
     @PutMapping("/subreddits/{title}")
-    public Subreddit updateSubreddit(@PathVariable String title,  @RequestBody  Subreddit newSubreddit){
+    public Subreddit updateSubreddit(@PathVariable String title, @RequestBody Subreddit newSubreddit) {
         newSubreddit.setTitle(title);
         return subredditService.save(newSubreddit);
     }

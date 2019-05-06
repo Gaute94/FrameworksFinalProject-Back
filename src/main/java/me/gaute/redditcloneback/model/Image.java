@@ -1,11 +1,9 @@
 package me.gaute.redditcloneback.model;
 
-        import lombok.Data;
-        import lombok.NoArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-        import javax.persistence.*;
-        import java.nio.charset.StandardCharsets;
-        import java.util.Base64;
+import javax.persistence.*;
 
 @Entity
 @Data

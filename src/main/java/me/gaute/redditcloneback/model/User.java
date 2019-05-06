@@ -7,8 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.LinkedList;
 import java.util.List;
 
 @Entity
@@ -22,7 +20,7 @@ public class User {
     private String email;
     private String password;
     private String role;
-    @ManyToMany (fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @JsonManagedReference

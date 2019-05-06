@@ -1,10 +1,9 @@
 package me.gaute.redditcloneback.service;
 
-import me.gaute.redditcloneback.model.User;
 import me.gaute.redditcloneback.model.SaveUserResponse;
+import me.gaute.redditcloneback.model.User;
 import me.gaute.redditcloneback.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,21 +19,23 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public List<User> getAllUsers(){ return userRepository.findAll(); }
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
 
-    public SaveUserResponse save(User user, boolean update){
+    public SaveUserResponse save(User user, boolean update) {
 
         SaveUserResponse response = new SaveUserResponse();
 
-        if( !update && (userRepository.findUserByUsername(user.getUsername()).isPresent() || userRepository.findUserByEmail(user.getEmail()).isPresent())){
+        if (!update && (userRepository.findUserByUsername(user.getUsername()).isPresent() || userRepository.findUserByEmail(user.getEmail()).isPresent())) {
 
             response.setUser(null);
             response.setMessage("Username or email already registered");
             response.setOk(false);
 
-            return  response;
+            return response;
 
-        }else {
+        } else {
             response.setOk(true);
             response.setMessage("Accepted");
             response.setUser(userRepository.save(user));
@@ -42,29 +43,33 @@ public class UserService {
         return response;
     }
 
-    public long countUsers(){
+    public long countUsers() {
         return userRepository.count();
     }
 
-    public void deleteById(long id){
+    public void deleteById(long id) {
         userRepository.deleteById(id);
     }
 
-    public Optional<User> getOne(long id){
+    public Optional<User> getOne(long id) {
         Optional<User> user = userRepository.findById(id);
-        return user;}
+        return user;
+    }
 
-    public Optional<User> getByEmail(String email){ return userRepository.findUserByEmail(email);}
+    public Optional<User> getByEmail(String email) {
+        return userRepository.findUserByEmail(email);
+    }
 
-    public Optional<User> getByUsername(String username) {return userRepository.findUserByUsername(username);}
+    public Optional<User> getByUsername(String username) {
+        return userRepository.findUserByUsername(username);
+    }
 
 
-
-    public List<User> getNonDeleted(){
+    public List<User> getNonDeleted() {
         List<User> users = userRepository.findAll();
         List<User> usersCopy = new ArrayList<>(users);
-        for(User user : users){
-            if(user.getEmail().equals("DELETED")){
+        for (User user : users) {
+            if (user.getEmail().equals("DELETED")) {
                 usersCopy.remove(user);
             }
         }
