@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -57,6 +58,19 @@ public class UserService {
 
     public Optional<User> getByUsername(String username) {return userRepository.findUserByUsername(username);}
 
+
+
+    public List<User> getNonDeleted(){
+        List<User> users = userRepository.findAll();
+        List<User> usersCopy = new ArrayList<>(users);
+        for(User user : users){
+            if(user.getEmail().equals("DELETED")){
+                usersCopy.remove(user);
+            }
+        }
+        System.out.println("usersCopy: " + usersCopy);
+        return usersCopy;
+    }
 
 
 }

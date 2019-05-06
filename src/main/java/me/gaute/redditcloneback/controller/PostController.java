@@ -3,6 +3,7 @@ package me.gaute.redditcloneback.controller;
 
 import me.gaute.redditcloneback.model.Post;
 import me.gaute.redditcloneback.model.Subreddit;
+import me.gaute.redditcloneback.model.SubredditAndUser;
 import me.gaute.redditcloneback.model.User;
 import me.gaute.redditcloneback.service.PostService;
 import me.gaute.redditcloneback.service.SubredditService;
@@ -10,6 +11,8 @@ import me.gaute.redditcloneback.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,6 +32,9 @@ public class PostController {
     public List<Post> getAllPosts(){
         return postService.getAllPosts();
     }
+
+    @GetMapping("/posts/ordered")
+    public List<Post> getAllPostsByDate(){ return postService.getAllPostsByDate();}
 
     @GetMapping("/posts/id/{id}")
     public Optional<Post> getPostById(@PathVariable long id){
@@ -63,5 +69,10 @@ public class PostController {
     public Post updatePost(@PathVariable long id,  @RequestBody  Post newPost){
         newPost.setId(id);
         return postService.save(newPost);
+    }
+
+    @PostMapping("/posts/postsFeed")
+    public List<Post> getAllSubscribedAndFollowed(@RequestBody SubredditAndUser subredditAndUser){
+            return postService.getAllSubscribedAndFollowed(subredditAndUser.getSubreddits(), subredditAndUser.getUsers());
     }
 }

@@ -2,6 +2,7 @@ package me.gaute.redditcloneback.service;
 
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import javafx.geometry.Pos;
+import me.gaute.redditcloneback.model.Image;
 import me.gaute.redditcloneback.model.Post;
 import me.gaute.redditcloneback.model.Subreddit;
 import me.gaute.redditcloneback.model.User;
@@ -23,6 +24,9 @@ public class DeleteService {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    ImageService imageService;
 
     public String deletePost(long id){
         Optional<Post> post = postService.getOne(id);
@@ -58,7 +62,14 @@ public class DeleteService {
             return "No subreddit with that title";
         }
     }
-
+/*
+    public void deleteImagesByOwner(User owner){
+        List<Image> images = imageService.getImagesByOwner(owner);
+        for(Image image : images){
+            imageService.deleteById(image.getId());
+        }
+    }
+*/
     public String deleteUser(String username){
         Optional<User> user = userService.getByUsername(username);
         if(user.isPresent()){
@@ -69,6 +80,7 @@ public class DeleteService {
             user.get().setUsername(randomUsername());
             user.get().setPassword(randomPassword());
             deleteAllPostsByOwner(user.get());
+            //deleteImagesByOwner(user.get());
             userService.save(user.get(), true);
             return "Deleted";
         }else{

@@ -25,6 +25,8 @@ public class PostService {
 
     public List<Post> getAllPosts(){ return postRepository.findAll(); }
 
+    public List<Post> getAllPostsByDate(){return postRepository.findAllByOrderByDateDesc();}
+
     public Post save(Post post){
         return postRepository.save(post);
     }
@@ -44,11 +46,15 @@ public class PostService {
     //public Optional<User> getByEmail(String email){ return userRepository.findUserByEmail(email);}
 
     public List<Post> getAllSubredditPosts(Subreddit subreddit){
-        return postRepository.findBySubreddit(subreddit);
+        return postRepository.findBySubredditOrderByDateDesc(subreddit);
+    }
+
+    public List<Post> getAllSubscribedAndFollowed(List<Subreddit> subreddit, List<User> user){
+        return postRepository.findAllBySubredditInOrOwnerInOrderByDateDesc(subreddit, user);
     }
 
     public List<Post> getPostsByOwner(User owner){
-        return postRepository.findByOwner(owner);
+        return postRepository.findByOwnerOrderByDateDesc(owner);
     }
 
 }

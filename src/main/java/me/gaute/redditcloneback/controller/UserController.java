@@ -53,4 +53,10 @@ public class UserController {
         newUser.setId(id);
         return userService.save(newUser, true);
     }
+
+    @GetMapping("/users/nonDeleted")
+    public List<User> getNonDeleted(){
+        System.out.println("USERS: " + userService.getNonDeleted());
+        return userService.getNonDeleted();
+    }
 }

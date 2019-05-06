@@ -4,6 +4,8 @@ package me.gaute.redditcloneback.model;
         import lombok.NoArgsConstructor;
 
         import javax.persistence.*;
+        import java.nio.charset.StandardCharsets;
+        import java.util.Base64;
 
 @Entity
 @Data

@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -23,4 +24,7 @@ public class Post {
     private int likes;
     @ManyToMany(fetch = FetchType.LAZY)
     private List<User> userLikes;
+    @ManyToOne(cascade = CascadeType.REMOVE)
+    private Image image;
+    private LocalDateTime date;
 }

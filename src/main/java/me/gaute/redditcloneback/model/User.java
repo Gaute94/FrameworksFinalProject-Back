@@ -27,7 +27,7 @@ public class User {
     @ToString.Exclude
     @JsonManagedReference
     private List<Subreddit> subreddits;
-    @OneToMany (fetch = FetchType.LAZY)
+    @ManyToMany (fetch = FetchType.LAZY)
     private List<User> following;
 
     public User(String username, String email, String password) {

@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PostRepository extends JpaRepository<Post, Long> {
-        List<Post> findBySubreddit(Subreddit subreddit);
-        List<Post> findByOwner(User user);
+        List<Post> findAllByOrderByDateDesc();
+        List<Post> findBySubredditOrderByDateDesc(Subreddit subreddit);
+        List<Post> findByOwnerOrderByDateDesc(User user);
+        List<Post> findAllBySubredditInOrOwnerInOrderByDateDesc(List<Subreddit> subreddit, List<User> user);
 }
